@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const State = require("../models/State");
-const bcrpyt = require("bcrypt")
+const bcrpyt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 const signup = async (req, res) => {
