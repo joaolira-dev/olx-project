@@ -1,0 +1,26 @@
+.aditem a {
+  display: block;
+  border: 3px solid #eee;
+  margin: 10px;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: #000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all ease 0.3s;
+}
+
+.aditem a:hover {
+  border: 3px solid #ccc;
+  transform: scale(1.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.itemImage img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.itemName {
+  font-weight: bold;
+}

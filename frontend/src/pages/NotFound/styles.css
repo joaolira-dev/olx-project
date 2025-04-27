@@ -1,0 +1,43 @@
+.notfound-container {
+   text-align: center;
+   padding: 60px 20px;
+   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+   background: linear-gradient(145deg, #f0f0f0, #ffffff);
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ }
+ 
+ .notfound-container h1 {
+   font-size: 120px;
+   margin: 0;
+   color: #ff8100;
+ }
+ 
+ .notfound-container h2 {
+   font-size: 32px;
+   margin: 20px 0 10px;
+   color: #333;
+ }
+ 
+ .notfound-container p {
+   font-size: 18px;
+   color: #666;
+   margin-bottom: 30px;
+ }
+ 
+ .back-home {
+   text-decoration: none;
+   color: #fff;
+   background-color: #ff8100;
+   padding: 12px 24px;
+   border-radius: 8px;
+   transition: background 0.3s ease;
+ }
+ 
+ .back-home:hover {
+   background-color: #e56606;
+ }
+ 

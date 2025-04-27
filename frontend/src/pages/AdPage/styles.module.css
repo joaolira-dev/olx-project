@@ -1,0 +1,105 @@
+.pageArea {
+  display: flex;
+  margin-top: 20px;
+}
+
+.box {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px #999;
+  margin-bottom: 20px;
+}
+
+.boxPadding {
+  padding: 10px;
+}
+
+.Fake {
+  background-color: #ddd;
+  height: 30px;
+}
+
+.leftSide {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.leftSide .box {
+  display: flex;
+}
+
+.adImage {
+  width: 320px;
+  height: 320px;
+  margin-right: 20px;
+}
+
+.eachSlide img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 320px;
+}
+
+.adInfo {
+  flex: 1
+}
+
+.adName {
+  margin-bottom: 20px;
+}
+
+.adName h2 {
+  margin: 0;
+  margin-top: 20px
+}
+
+small {
+  color: #6e0ad6;
+}
+
+.rightSide {
+  width: 250px;
+}
+
+.spanPrice {
+  display: block;
+  font-weight: bold;
+  font-size: 27px;
+}
+
+.contactSellerLink {
+  background-color: #6e0ad6;
+  color: #fff;
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px #999;
+  justify-content: center;
+  height: 30px;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.createdBy small {
+  display: block;
+  color: #999;
+  margin-top: 10px;
+}
+
+.othersArea h2 {
+  font-size: 20px;
+}
+
+.othersArea list {
+  display: flex;
+}
+
+
+.BreadCrumb a {
+  margin: 0px 5px;
+  display: inline-block;
+  text-decoration: underline;
+  color: #FF8100;
+}

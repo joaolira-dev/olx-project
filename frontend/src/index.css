@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.PageContainer {
+  max-width: 1000px;
+  margin: auto;
+}
+
+
+.PageTitle {
+  font-size: 27px;
+}
+
+.ErrorMessage {
+  margin: 10px 0;
+  background-color: #ffcaca;
+  color: #000;
+  border: 2px solid #ff0000;
+  padding: 10px;
+}
+
+.SearchArea {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0px;
+}
+
+.BreadCrumb {
+  font-size: 13px;
+  margin-top: 20px;
+}

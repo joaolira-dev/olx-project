@@ -1,0 +1,173 @@
+.pageContainer {
+  min-height: 360px;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.editButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #6e0ad6;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.editButton:hover {
+  background: #410481;
+}
+
+.accountCard {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6e0ad6, #220244);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.accountInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 20px;
+  color: #6e0ad6;
+}
+
+.infoItem div {
+  flex: 1;
+}
+
+.infoItem label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.infoItem p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.infoItem input, .infoItem select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.saveButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.saveButton:hover {
+  background: #218838;
+}
+
+.footerLinks {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.footerLinks h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.links a {
+  color: #6e0ad6;
+  text-decoration: none;
+  transition: all 0.3s;
+  padding: 5px 0;
+}
+
+.links a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.ads {
+  display: flex;
+}
+
+.seeAdsButton {
+    display: flex;
+    align-items: center;
+    background: #6e0ad6;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.seeAdsButton:hover {
+  background: #410481;
+}
