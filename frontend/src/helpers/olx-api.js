@@ -1,4 +1,4 @@
-const BASEAPI = "https://olx-api-r0w5.onrender.com"
+const BASEAPI = "https://olx-project-k5fv.onrender.com"
 import Cookies from "js-cookie"
 import qs from "qs"
 

@@ -28,10 +28,11 @@ server.use(express.static(__dirname+ "/public"))
 
 server.use("/", mainRouter)
 
-server.listen(process.env.PORT, () => {
-   console.log("Servidor rodando em: "+ process.env.BASE)
-})
 
 
+const port = process.env.PORT || 5000;
+server.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});
 
  
