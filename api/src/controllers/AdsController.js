@@ -1,5 +1,4 @@
 const jimp = require("jimp");
-const sharp = require("sharp")
 const { v4: uuid } = require("uuid");
 
 //models
