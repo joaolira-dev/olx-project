@@ -1,4 +1,4 @@
-const BASEAPI = "http://localhost:5000"
+const BASEAPI = "https://olx-api-r0w5.onrender.com"
 import Cookies from "js-cookie"
 import qs from "qs"
 
