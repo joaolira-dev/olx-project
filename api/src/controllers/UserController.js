@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const Category = require("../models/Category");
 const Ad = require("../models/Ad");
 const User = require("../models/User");
-const bcrpyt = require("bcryptjs")
+const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 module.exports = {
@@ -68,7 +68,7 @@ module.exports = {
    }
 
     if(password) {
-      updates.passwordHash = bcrpyt.hash(password, 10)
+      updates.passwordHash = bcrypt.hash(password, 10)
     }
 
     await User.findOneAndUpdate({ token: token}, {$set: updates})
