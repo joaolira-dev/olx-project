@@ -76,14 +76,14 @@ module.exports = {
     
       
       for (let file of imageArray) {
-        if (["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.mimetype)) {
+        if (["image/jpeg", "image/jpg", "image/png"].includes(file.mimetype)) {
           let url = await addImage(file.data);
           newAd.images.push({
             url,
             default: false,
           });
         } else {
-          return res.json({ error: "Tipo de imagem não suportado" });
+          return res.json({ error: "Tipo de imagem não suportado , apenas PNG, JPG ou JPEG" });
         }
       }
     }
