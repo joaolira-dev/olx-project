@@ -63,7 +63,7 @@ const signin = async (req,res) => {
 
 
    // Validando a senha
-   const match = await bcrpyt.compare(password, user.passwordHash)
+   const match = await bcrypt.compare(password, user.passwordHash)
    if(!match) {
     res.json({ error: "E-mail e/ou senha errados!"})
     return
