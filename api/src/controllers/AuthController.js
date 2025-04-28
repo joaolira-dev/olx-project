@@ -31,7 +31,7 @@ const signup = async (req, res) => {
 
 
    // hash e token
-   const passwordHash = await bcrpyt.hash(password, 10)
+   const passwordHash = await bcrypt.hash(password, 10)
    const token = jwt.sign({email,name}, process.env.JWT_SECRET_KEY)
 
    // criando o usuario
