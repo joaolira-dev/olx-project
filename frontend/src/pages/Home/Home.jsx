@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./styles.module.css";
-import animations from "../../animations.module.css"
+import animations from "../../animations.module.css";
 import useApi from "../../helpers/olx-api";
 import { FiSearch } from "react-icons/fi";
 import { useState, useEffect } from "react";
@@ -49,16 +49,23 @@ const Home = () => {
 
   return (
     <>
-      <SearchArea className={animations.fadeIn}>
-        <PageContainer className={`${styles.pageContainer} ${animations.fadeIn}`}>
+      <SearchArea className={`${animations.fadeIn} ${styles.searchArea}`}>
+        <PageContainer
+          className={`${styles.pageContainer} ${animations.fadeIn}`}
+        >
           <div className={styles.searchBox}>
             <form method="GET" action="/ads" className={styles.formHome}>
-              <input
-                type="text"
-                name="q"
-                placeholder="O que você procura?"
-                className={styles.inputHome}
-              />
+              <div className={styles.inputAndButton}>
+                <input
+                  type="text"
+                  name="q"
+                  placeholder="O que você procura?"
+                  className={styles.inputHome}
+                />
+                <button type="submit" className={styles.searchButton}>
+                  <FiSearch size={24} className={styles.imgButton} />
+                </button>
+              </div>
               <select name="state" className={styles.selectHome}>
                 <option value="">Estado</option>
                 {stateList.map((state, index) => (
@@ -67,9 +74,6 @@ const Home = () => {
                   </option>
                 ))}
               </select>
-              <button type="submit" className={styles.searchButton}>
-                <FiSearch size={24} className={styles.imgButton}/>
-              </button>
             </form>
           </div>
           <div className={styles.categoryList}>
@@ -91,7 +95,7 @@ const Home = () => {
           <h2>Anúncios Recentes</h2>
           <div className={styles.list}>
             {adsList.map((ad, index) => (
-              <AdItem key={index} data={ad} width="25%" />
+              <AdItem key={index} data={ad} width="25%" className={styles.aditem}/>
             ))}
           </div>
           <Link to="/ads" className={styles.seeAllLink}>

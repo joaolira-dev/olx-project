@@ -52,3 +52,25 @@
    color: #aaa;
  }
  
+ @media (max-width: 600px) {
+  .footerContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px; 
+  }
+
+  .footerSection {
+    width: auto; 
+    max-width: 300px; 
+    margin-bottom: 10px; 
+  }
+
+  .footerSection h4 {
+    margin-top: 0; 
+  }
+
+  .copy {
+    margin-top: 20px;
+  }
+}
