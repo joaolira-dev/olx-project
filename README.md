@@ -61,10 +61,10 @@ Cada obstáculo superado foi uma oportunidade real de crescimento.
 ## Screenshots do Projeto
 
 ### Página Inicial
-![Home](./frontend/assets/screenshot1.png)
+![Home](./frontend/src/assets/screenshot1.png)
 
 ### Página de Anúncio
-![Ad Page](./frontend/assets/screenshot2.png)
+![Ad Page](./frontend/src/assets/screenshot2.png)
 
 ## 🚀 Link do Projeto Online
 
