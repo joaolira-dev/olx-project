@@ -92,8 +92,9 @@ small {
   font-size: 20px;
 }
 
-.othersArea list {
+.othersArea .list {
   display: flex;
+  flex-wrap: wrap;
 }
 
 
@@ -102,4 +103,52 @@ small {
   display: inline-block;
   text-decoration: underline;
   color: #FF8100;
+}
+
+
+@media (max-width:600px) {
+  .BreadCrumb {
+    text-align: center;
+  }
+
+  .pageArea {
+    flex-direction: column;
+  }
+
+  .leftSide .box {
+    flex-direction: column;
+    width: 320px;
+    margin: auto;
+  }
+
+  .leftSide {
+    margin: 0;
+  }
+
+  .leftSide .adInfo {
+    padding: 10px;
+  }
+
+  .rightSide {
+    width: auto;
+    margin-top: 20px;
+  }
+
+  .rightSide .box {
+    width: 320px;
+    margin: auto;
+  }
+
+  .contactSellerLink {
+    width: 320px;
+    margin: 20px auto;
+  }
+
+  .othersArea {
+    margin: 10px;
+  }
+
+  .aditem {
+    width: 50% !important;
+   }
 }

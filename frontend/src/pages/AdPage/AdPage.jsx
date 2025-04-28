@@ -142,7 +142,7 @@ const AdPage = () => {
             <h2>Outras ofertas do mesmo vendedor</h2>
             <div className={styles.list}>
               {adInfo.others.map((other, index) => (
-                <AdItem key={index} data={other} width="25%"/>
+                <AdItem key={index} data={other} width="25%" className={styles.aditem}/>
               ))}
             </div>
           </>

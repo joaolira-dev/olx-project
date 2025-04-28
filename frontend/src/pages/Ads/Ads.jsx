@@ -165,7 +165,7 @@ const Home = () => {
             ) : adsList.length > 0 ? (
               <div className={styles.list}>
                 {adsList.map((ad, index) => (
-                  <AdItem key={index} data={ad} width="33%" />
+                  <AdItem key={index} data={ad} width="33%" className={styles.aditem} />
                 ))}
               </div>
             ) : (

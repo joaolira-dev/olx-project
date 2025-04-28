@@ -38,7 +38,7 @@ const Signin = () => {
             title: ad.title,
             price: ad.price,
             priceNegotiable: ad.priceNegotiable,
-            image: `http://localhost:5000/media/${defaultImage}`,
+            image: `https://olx-project-k5fv.onrender.com/media/${defaultImage}`,
           };
         })
       );
@@ -200,7 +200,7 @@ const Signin = () => {
             {seeAds &&
               (adsList.length > 0 ? (
                 adsList.map((ad) => (
-                  <AdItem data={ad} key={ad.id} width="25%" />
+                  <AdItem data={ad} key={ad.id} width="25%" className={styles.aditem} />
                 ))
               ) : (
                 <p>Nenhum anúncio encontrado</p>

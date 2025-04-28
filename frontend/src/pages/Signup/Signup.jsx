@@ -56,7 +56,7 @@ const Signup = () => {
   };
 
   return (
-    <PageContainer className={animations.slideInLeft}>
+    <PageContainer className={`${animations.slideInLeft} ${styles.pageContainer}`}>
       <PageTitle>Cadastro</PageTitle>
       <PageArea>
         {error &&

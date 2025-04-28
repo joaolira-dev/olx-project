@@ -159,3 +159,27 @@ li {
   flex-wrap: wrap;
   animation: fadeIn 0.3s ease-in-out;
 }
+
+@media (max-width:600px) {
+  .pageArea {
+    flex-direction: column;
+  }
+
+  .leftSide {
+    width: auto;
+    margin: 10px;
+  }
+
+  .leftSide ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .leftSide li {
+    width: 33%;
+  }
+
+  .list .aditem {
+    width: 50% !important;
+  }
+}

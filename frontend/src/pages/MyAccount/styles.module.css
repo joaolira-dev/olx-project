@@ -171,3 +171,15 @@
 .seeAdsButton:hover {
   background: #410481;
 }
+
+@media (max-width: 600px) {
+  .avatar {
+    border-radius: 50%;
+    width: 80px;
+  }
+  
+  .aditem {
+    margin-top: 10px;
+    width: 50% !important;
+  }
+}

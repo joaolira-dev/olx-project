@@ -17,12 +17,12 @@ const Header = () => {
       <PageContainer className={styles.pageContainer}>
         <div className={styles.logo}>
           <Link to="/">
-            <img src={olxLogo} />
+            <img src={olxLogo} alt="OLX Logo" />
           </Link>
         </div>
-        <nav>
-          <ul>
-            {logged && (
+        <nav className={styles.nav}>
+          <ul className={styles.ul}>
+            {logged ? (
               <>
                 <li>
                   <Link to="/my-account" className={styles.headerStyle}>
@@ -30,18 +30,12 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link className={styles.headerStyle} onClick={handleLogout}>
+                  <Link to="/" onClick={handleLogout} className={styles.headerStyle}>
                     Sair
                   </Link>
                 </li>
-                <li>
-                  <Link to="/post-an-ad" className={styles.button}>
-                    Postar Anúncio
-                  </Link>
-                </li>
               </>
-            )}
-            {!logged && (
+            ) : (
               <>
                 <li>
                   <Link to="/signin" className={styles.headerStyle}>
@@ -53,14 +47,12 @@ const Header = () => {
                     Cadastrar
                   </Link>
                 </li>
-                <li>
-                  <Link to="/post-an-ad" className={styles.button}>
-                    Postar Anúncio
-                  </Link>
-                </li>
               </>
             )}
           </ul>
+          <Link to="/post-an-ad" className={styles.button}>
+            Postar Anúncio
+          </Link>
         </nav>
       </PageContainer>
     </div>

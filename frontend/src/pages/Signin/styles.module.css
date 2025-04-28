@@ -6,7 +6,7 @@
 }
 
 .pageContainer {
-  min-height: 360px
+  min-height: 360px;
 }
 
 .area {
@@ -56,4 +56,29 @@
   color: #fff;
   font-size: 15px;
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .pageContainer {
+    padding: 15px;
+  }
+
+  .area {
+    flex-direction: column;
+  }
+
+  .area .areaTitle {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+
+  .areaInput {
+    width: 100%;
+  }
+
+  .areaInput button {
+    width: 100%;
+    padding: 10px;
+  }
 }

@@ -65,7 +65,7 @@ const Signin = () => {
   };
 
   return (
-    <PageContainer className={animations.slideInLeft}>
+    <PageContainer className={`${animations.slideInLeft} ${styles.pageContainer}`}>
       <PageTitle>Postar um anúncio</PageTitle>
       <PageArea>
         {error &&
