@@ -1,6 +1,7 @@
 const jimp = require("jimp");
 const fs = require("fs")
 const { v4: uuid } = require("uuid");
+const path = require("path")
 
 //models
 const Category = require("../models/Category");
