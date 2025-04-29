@@ -8,6 +8,19 @@ const User = require("../models/User");
 const Ad = require("../models/Ad");
 const State = require("../models/State");
 
+const addImage = async (buffer) => {
+  let newName = `${uuid()}.jpg`;
+  let tmpImg = await jimp.read(buffer);
+  const imagePath = path.join(__dirname, "../../public/media", newName);
+  tmpImg.cover(500, 500).quality(80).write(imagePath);
+  return newName;
+};
+
+const mediaDir = path.join(__dirname, "public", "media")
+if(!fs.existsSync((mediaDir))) {
+  fs.mkdirSync(mediaDir, {recursive: true})
+}
+
 module.exports = {
   getCategories: async (req, res) => {
     let cats = await Category.find();
@@ -28,17 +41,7 @@ module.exports = {
 
     const user = await User.findOne({ token }).exec();
 
-    const mediaDir = path.join(__dirname, "public", "media")
-    if(!fs.existsSync((mediaDir))) {
-      fs.mkdirSync(mediaDir, {recursive: true})
-    }
-
-    const addImage = async (buffer) => {
-      let newName = `${uuid()}.jpg`; // Corrigido para interpolação de string
-      let tmpImg = await jimp.read(buffer);
-      tmpImg.cover(500, 500).quality(80).write(`./public/media/${newName}`); // Corrigido para interpolação de string
-      return newName;
-    };
+  
 
     if (!title || !cat) {
       return res.json({ error: "Título e/ou categoria não preenchidos" });

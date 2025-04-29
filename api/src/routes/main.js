@@ -41,11 +41,6 @@ router.get("/ad/list", AdsController.getList);
 router.get("/ad/item", AdsController.getItem);
 router.post("/ad/:id", Auth.private, AdsController.editAction);
 
-// Roteamento de imagens de categorias e anúncios
-router.get("/assets/images", (req, res) => {
-  const imagePath = path.join(__dirname, "../public/media");
-  res.sendFile(imagePath);
-});
 
 // Exportando as rotas
 module.exports = router;
