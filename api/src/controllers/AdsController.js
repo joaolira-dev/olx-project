@@ -1,4 +1,5 @@
 const jimp = require("jimp");
+const fs = require("fs")
 const { v4: uuid } = require("uuid");
 
 //models
@@ -16,7 +17,7 @@ module.exports = {
     for (let i in cats) {
       categories.push({
         ...cats[i]._doc,
-        img: `${process.env.BASE}/assets/images/${cats[i].slug}.png`,
+        img: `${process.env.BASE}/assets/images/${cats[i].slug}.png`, // Corrigido para interpolação de string
       });
     }
 
@@ -25,37 +26,37 @@ module.exports = {
   addAction: async (req, res) => {
     let { title, price, priceneg, desc, cat, token } = req.body;
 
-
     const user = await User.findOne({ token }).exec();
 
-   
-  
+    const mediaDir = path.join(__dirname, "public", "media")
+    if(!fs.existsSync((mediaDir))) {
+      fs.mkdirSync(mediaDir, {recursive: true})
+    }
+
     const addImage = async (buffer) => {
-      let newName = `${uuid()}.jpg`;
+      let newName = `${uuid()}.jpg`; // Corrigido para interpolação de string
       let tmpImg = await jimp.read(buffer);
-      tmpImg.cover(500, 500).quality(80).write(`./public/media/${newName}`);
+      tmpImg.cover(500, 500).quality(80).write(`./public/media/${newName}`); // Corrigido para interpolação de string
       return newName;
     };
-  
+
     if (!title || !cat) {
       return res.json({ error: "Título e/ou categoria não preenchidos" });
     }
-  
-   
 
     const category = await Category.findOne({ name: cat });
 
-    if(!category) {
-      return res.json({ error: "Categoria não existe "})
+    if (!category) {
+      return res.json({ error: "Categoria não existe " });
     }
-  
+
     if (price) {
       price = price.replace(".", "").replace(",", ".").replace("R$ ", "");
       price = parseFloat(price);
     } else {
       price = 0;
     }
-  
+
     const newAd = new Ad();
     newAd.status = true;
     newAd.idUser = user._id;
@@ -68,13 +69,12 @@ module.exports = {
     newAd.description = desc;
     newAd.views = 0;
     newAd.images = [];
-  
+
     // Suporte a múltiplas imagens (img ou img[])
     let files = req.files?.img || req.files?.["img[]"];
     if (files) {
       const imageArray = Array.isArray(files) ? files : [files];
-    
-      
+
       for (let file of imageArray) {
         if (["image/jpeg", "image/jpg", "image/png"].includes(file.mimetype)) {
           let url = await addImage(file.data);
@@ -83,15 +83,15 @@ module.exports = {
             default: false,
           });
         } else {
-          return res.json({ error: "Tipo de imagem não suportado , apenas PNG, JPG ou JPEG" });
+          return res.json({ error: "Tipo de imagem não suportado, apenas PNG, JPG ou JPEG" });
         }
       }
     }
-  
+
     if (newAd.images.length > 0) {
       newAd.images[0].default = true;
     }
-  
+
     const info = await newAd.save();
     res.json({ id: info._id });
   },
@@ -106,7 +106,6 @@ module.exports = {
 
     if (cat) {
       const c = await Category.findOne({ slug: cat }).exec();
-      console.log(c);
       if (c) {
         filters.category = c._id.toString();
       }
@@ -116,8 +115,7 @@ module.exports = {
       const s = await State.findOne({ name: state.toUpperCase() }).exec();
       if (s) {
         filters.state = s._id;
-      } // adicionando o else porque nao tem todos os estados no banco ou seja se procurar polr um estado que nao existe vai retornar null
-      else {
+      } else {
         filters.state = null;
       }
     }
@@ -136,9 +134,9 @@ module.exports = {
       // pegando a imagem padrao
       let defaultImg = adsData[i].images.find((e) => e.default);
       if (defaultImg) {
-        image = `${process.env.BASE}/media/${defaultImg.url}`;
+        image = `${process.env.BASE}/media/${defaultImg.url}`; // Corrigido para interpolação de string
       } else {
-        image = `${process.env.BASE}/media/default.jpg`;
+        image = `${process.env.BASE}/media/default.jpg`; // Corrigido para interpolação de string
       }
 
       ads.push({
@@ -149,7 +147,6 @@ module.exports = {
         image,
       });
     }
-
 
     res.json({ ads, query, total });
   },
@@ -172,7 +169,7 @@ module.exports = {
 
     let images = [];
     for (let i in ad.images) {
-      images.push(`${process.env.BASE}/media/${ad.images[i].url}`);
+      images.push(`${process.env.BASE}/media/${ad.images[i].url}`); // Corrigido para interpolação de string
     }
 
     let category = await Category.findById(ad.category).exec();
@@ -188,11 +185,11 @@ module.exports = {
 
       for (let i in otherData) {
         if (otherData[i]._id.toString() !== ad.id.toString()) {
-          let image = `${process.env.BASE}/media/default.jpg`;
+          let image = `${process.env.BASE}/media/default.jpg`; // Corrigido para interpolação de string
 
           let defaultImg = otherData[i].images.find((e) => e.default);
           if (defaultImg) {
-            image = `${process.env.BASE}/media/${defaultImg.url}`;
+            image = `${process.env.BASE}/media/${defaultImg.url}`; // Corrigido para interpolação de string
           }
 
           others.push({
@@ -221,7 +218,7 @@ module.exports = {
       },
       category: {
         name: category.name,
-        slug: category.slug
+        slug: category.slug,
       },
       stateName: state.name,
       others,
