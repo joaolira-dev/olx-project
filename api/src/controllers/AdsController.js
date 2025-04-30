@@ -1,7 +1,14 @@
 const jimp = require("jimp");
-const fs = require("fs")
+const fs = require("fs");
 const { v4: uuid } = require("uuid");
-const path = require("path")
+const { v2: cloudinary } = require("cloudinary");
+const path = require("path");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 
 //models
 const Category = require("../models/Category");
@@ -10,16 +17,27 @@ const Ad = require("../models/Ad");
 const State = require("../models/State");
 
 const addImage = async (buffer) => {
-  let newName = `${uuid()}.jpg`;
-  let tmpImg = await jimp.read(buffer);
-  const imagePath = path.join(__dirname, "../../public/media", newName);
-  tmpImg.cover(500, 500).quality(80).write(imagePath);
-  return newName;
-};
+  const image = await jimp.read(buffer);
+  image.cover(500, 500).quality(80);
 
-const mediaDir = path.join(__dirname, "public", "media")
-if(!fs.existsSync((mediaDir))) {
-  fs.mkdirSync(mediaDir, {recursive: true})
+  const processedBuffer = await image.getBufferAsync(jimp.MIME_JPEG);
+
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "ads", // ou qualquer pasta sua
+        format: "jpg",
+      },
+      (error, result) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(result.secure_url); // URL da imagem no Cloudinary
+      }
+    );
+
+    stream.end(processedBuffer);
+  });
 }
 
 module.exports = {
@@ -41,8 +59,6 @@ module.exports = {
     let { title, price, priceneg, desc, cat, token } = req.body;
 
     const user = await User.findOne({ token }).exec();
-
-  
 
     if (!title || !cat) {
       return res.json({ error: "Título e/ou categoria não preenchidos" });
@@ -87,7 +103,9 @@ module.exports = {
             default: false,
           });
         } else {
-          return res.json({ error: "Tipo de imagem não suportado, apenas PNG, JPG ou JPEG" });
+          return res.json({
+            error: "Tipo de imagem não suportado, apenas PNG, JPG ou JPEG",
+          });
         }
       }
     }
@@ -100,7 +118,15 @@ module.exports = {
     res.json({ id: info._id });
   },
   getList: async (req, res) => {
-    let { sort = "asc", skip = 0, limit = 8, offset = 0, q, cat, state } = req.query;
+    let {
+      sort = "asc",
+      skip = 0,
+      limit = 8,
+      offset = 0,
+      q,
+      cat,
+      state,
+    } = req.query;
     let filters = { status: true };
     let query = req.query;
 
