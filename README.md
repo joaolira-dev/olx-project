@@ -46,7 +46,7 @@ Cada obstáculo superado foi uma oportunidade real de crescimento.
 - React.js (Vite)
 - CSS Modules
 - React Router Dom
-- Axios
+
 
 **Backend:**
 - Node.js
