@@ -16,6 +16,7 @@ import {
 const Home = () => {
   const api = useApi();
 
+  const [loading, setLoading] = useState(true);
   const [adsList, setAdsList] = useState([]);
   const [stateList, setStateList] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -32,6 +33,7 @@ const Home = () => {
     const getCategories = async () => {
       const cats = await api.getCategories();
       setCategories(cats);
+      setLoading(false);
     };
     getCategories();
   }, []);
@@ -43,6 +45,7 @@ const Home = () => {
         limit: 8,
       });
       setAdsList(json.ads);
+      setLoading(false);
     };
     getRecentAds();
   }, []);
@@ -76,28 +79,47 @@ const Home = () => {
               </select>
             </form>
           </div>
-          <div className={styles.categoryList}>
-            {categories.map((c, index) => (
-              <Link
-                key={index}
-                to={`/ads?cat=${c.slug}`}
-                className={styles.categoryItem}
-              >
-                <img src={c.img} alt={c.name} />
-                <span>{c.name}</span>
-              </Link>
-            ))}
-          </div>
+          {!loading && (
+            <div className={styles.categoryList}>
+              {categories.map((c, index) => (
+                <Link
+                  key={index}
+                  to={`/ads?cat=${c.slug}`}
+                  className={styles.categoryItem}
+                >
+                  <img src={c.img} alt={c.name} />
+                  <span>{c.name}</span>
+                </Link>
+              ))}
+            </div>
+          )}
+          {loading && (
+            <div className={styles.loadingArea}>
+              <div className={styles.spinner}></div>
+            </div>
+          )}
         </PageContainer>
       </SearchArea>
       <PageContainer className={animations.fadeIn}>
         <PageArea className={animations.fadeIn}>
           <h2>Anúncios Recentes</h2>
-          <div className={styles.list}>
-            {adsList.map((ad, index) => (
-              <AdItem key={index} data={ad} width="25%" className={styles.aditem}/>
-            ))}
-          </div>
+          {!loading && (
+            <div className={styles.list}>
+              {adsList.map((ad, index) => (
+                <AdItem
+                  key={index}
+                  data={ad}
+                  width="25%"
+                  className={styles.aditem}
+                />
+              ))}
+            </div>
+          )}
+           {loading && (
+            <div className={styles.loadingArea}>
+              <div className={styles.spinner}></div>
+            </div>
+          )}
           <Link to="/ads" className={styles.seeAllLink}>
             Ver todos
           </Link>

@@ -18,6 +18,33 @@
   margin: auto;
 }
 
+.loadingArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top-color: #6e0ad6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Fake {
+  background-color: #ddd;
+  height: 30px;
+}
+
 .formHome {
   display: flex;
   align-items: center; /* Centralizar na linha! */
@@ -129,7 +156,6 @@ h2 {
   width: 100%;
 }
 
-
 @media (max-width: 600px) {
   .inputAndButton {
     display: flex;
@@ -167,10 +193,9 @@ h2 {
   }
 
   .aditem {
-   width: 50% !important;
+    width: 50% !important;
   }
 
-  
   .seeAllLink {
     margin: 12px;
   }
