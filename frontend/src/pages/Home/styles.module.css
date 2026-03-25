@@ -1,23 +1,33 @@
+/* ===== SEARCH BOX ===== */
 .searchBox {
-  border: 2px solid #cfd4dd;
-  padding: 20px 15px;
-  border-radius: 20px;
-  max-width: 500px;
+  border: 1px solid #e2e5eb;
+  padding: 20px 20px;
+  border-radius: 16px;
+  max-width: 560px;
   margin: auto;
-  box-shadow: 1px 1px 1px 0.3 rgba(0, 0, 0, 0.3);
-  transition: all ease 0.2s;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
   box-sizing: border-box;
 }
 
 .searchBox:hover {
-  border: 2px solid #6e0ad6;
+  border-color: #d1c4f7;
+  box-shadow: 0 6px 28px rgba(110, 10, 214, 0.08);
 }
 
+.searchBox:focus-within {
+  border-color: #6e0ad6;
+  box-shadow: 0 6px 28px rgba(110, 10, 214, 0.12);
+}
+
+/* ===== PAGE CONTAINER ===== */
 .pageContainer {
   max-width: 1000px;
   margin: auto;
 }
 
+/* ===== LOADING ===== */
 .loadingArea {
   display: flex;
   justify-content: center;
@@ -28,7 +38,7 @@
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid #ccc;
+  border: 4px solid #e8e0f3;
   border-top-color: #6e0ad6;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -45,48 +55,55 @@
   height: 30px;
 }
 
+/* ===== FORM DE BUSCA ===== */
 .formHome {
   display: flex;
-  align-items: center; /* Centralizar na linha! */
-  gap: 10px; /* Espaço entre input, select e botão */
+  align-items: center;
+  gap: 10px;
   flex: 1;
 }
 
 .inputHome,
 .selectHome {
-  height: 40px;
-  background-color: #f8f8f8;
-  border: 0;
-  border-radius: 5px;
+  height: 42px;
+  background-color: #f5f5f7;
+  border: 1px solid transparent;
+  border-radius: 10px;
   outline: none;
   font-size: 15px;
-  color: #000;
-  margin-right: 20px;
+  color: #333;
+  margin-right: 10px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
 }
 
 .inputHome {
   flex: 1;
-  padding: 0 10px;
-  transition: all ease 0.4s;
+  padding: 0 14px;
+}
+
+.inputHome:focus {
+  border-color: #6e0ad6;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(110, 10, 214, 0.08);
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px #f8f8f8 inset !important;
-  -webkit-text-fill-color: #000 !important;
+  box-shadow: 0 0 0px 1000px #f5f5f7 inset !important;
+  -webkit-text-fill-color: #333 !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
 .selectHome {
-  width: 100px;
-  transition: all ease 0.4s;
+  width: 110px;
   cursor: pointer;
-  border: 0;
+  padding: 0 8px;
 }
 
 .selectHome:focus {
   outline: none;
-  border: 0;
-  box-shadow: none;
+  border-color: #6e0ad6;
+  box-shadow: 0 0 0 3px rgba(110, 10, 214, 0.08);
 }
 
 .selectHome:hover {
@@ -94,68 +111,168 @@ input:-webkit-autofill {
 }
 
 .searchButton {
-  height: 40px;
-  width: 40px;
-  transition: all ease 0.4s;
+  height: 42px;
+  width: 42px;
   cursor: pointer;
   background-color: transparent;
   border: 0;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  color: #555;
 }
 
 .searchButton:hover {
   color: #6e0ad6;
+  background-color: rgba(110, 10, 214, 0.06);
 }
 
+/* ===== CATEGORIAS ===== */
 .categoryList {
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
+  gap: 4px;
 }
 
 .categoryItem {
-  width: 20%;
+  width: 19%;
   display: flex;
   align-items: center;
-  color: #333;
+  color: #444;
   text-decoration: none;
-  height: 50px;
-  margin-bottom: 10px;
-  transition: all 0.2s ease-in-out;
+  height: 54px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  opacity: 0;
+  animation: categoryFadeIn 0.4s ease forwards;
+}
+
+.categoryItem:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.categoryItem:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.categoryItem:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.categoryItem:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.categoryItem:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.categoryItem:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.categoryItem:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+.categoryItem:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+@keyframes categoryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .categoryItem img {
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   margin-right: 10px;
+  transition: transform 0.25s ease;
 }
 
 .categoryItem:hover {
-  background-color: #f5f5f5;
+  background-color: rgba(110, 10, 214, 0.06);
+  color: #6e0ad6;
   transform: translateY(-2px);
 }
 
-h2 {
-  font-size: 20px;
-  margin-left: 10px;
+.categoryItem:hover img {
+  transform: scale(1.1);
 }
 
+/* ===== TITULO ===== */
+h2 {
+  font-size: 22px;
+  margin-left: 10px;
+  color: #222;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 50px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #6e0ad6, #a855f7);
+}
+
+/* ===== LISTA DE ADS ===== */
 .list {
   display: flex;
   flex-wrap: wrap;
 }
 
+/* ===== VER TODOS ===== */
 .seeAllLink {
-  color: #333;
-  display: inline-block;
-  font-weight: bold;
+  color: #6e0ad6;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
   text-decoration: none;
-  margin-top: 10px;
+  margin-top: 15px;
+  padding: 8px 0;
+  font-size: 15px;
+  transition: all 0.25s ease;
 }
 
+.seeAllLink:hover {
+  gap: 10px;
+  color: #5208a5;
+}
+
+.seeAllLink::after {
+  content: '→';
+  transition: transform 0.25s ease;
+}
+
+.seeAllLink:hover::after {
+  transform: translateX(4px);
+}
+
+/* ===== INPUT AND BUTTON AREA ===== */
 .inputAndButton {
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
+/* ===== RESPONSIVO ===== */
 @media (max-width: 600px) {
   .inputAndButton {
     display: flex;
@@ -169,6 +286,8 @@ h2 {
 
   .searchBox {
     border: 0;
+    box-shadow: none;
+    padding: 10px;
   }
 
   .inputHome {
@@ -183,13 +302,15 @@ h2 {
     text-align: center;
   }
 
-  .searchBox:hover {
+  .searchBox:hover,
+  .searchBox:focus-within {
     border: 0;
+    box-shadow: none;
   }
 
   .categoryList .categoryItem {
     width: 50%;
-    padding-left: 35px;
+    padding-left: 20px;
   }
 
   .aditem {

@@ -111,11 +111,12 @@ const Home = () => {
                   data={ad}
                   width="25%"
                   className={styles.aditem}
+                  style={{ animationDelay: `${index * 0.08}s` }}
                 />
               ))}
             </div>
           )}
-           {loading && (
+          {loading && (
             <div className={styles.loadingArea}>
               <div className={styles.spinner}></div>
             </div>
@@ -123,7 +124,6 @@ const Home = () => {
           <Link to="/ads" className={styles.seeAllLink}>
             Ver todos
           </Link>
-          <hr />
         </PageArea>
       </PageContainer>
     </>
