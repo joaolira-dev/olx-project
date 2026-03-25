@@ -1,11 +1,11 @@
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
 
-export const AdItem = ({ data, width, className = "" }) => {
-  let price = data.priceNegotiable ? "Preço Negociável" : data.price;
+export const AdItem = ({ data, width, className = "", style = {} }) => {
+  let price = data.priceNegotiable ? "Preço Negociável" : `R$ ${data.price}`;
 
   return (
-    <div className={`${styles.aditem} ${className}`} style={{ width: width }}>
+    <div className={`${styles.aditem} ${className}`} style={{ width: width, ...style }}>
       <Link to={`/ad/${data.id}`}>
         <div className={styles.itemImage}>
           <img src={data.image} alt={data.title} />
