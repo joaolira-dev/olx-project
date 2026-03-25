@@ -40,6 +40,11 @@ const addImage = async (buffer) => {
   });
 }
 
+const resolveImageUrl = (url) => {
+  if (url.startsWith('http')) return url;
+  return `${process.env.BASE}/media/${url}`;
+};
+
 module.exports = {
   getCategories: async (req, res) => {
     let cats = await Category.find();
@@ -56,66 +61,75 @@ module.exports = {
     res.json({ categories });
   },
   addAction: async (req, res) => {
-    let { title, price, priceneg, desc, cat, token } = req.body;
+    try {
+      let { title, price, priceneg, desc, cat, token } = req.body;
 
-    const user = await User.findOne({ token }).exec();
+      const user = await User.findOne({ token }).exec();
 
-    if (!title || !cat) {
-      return res.json({ error: "Título e/ou categoria não preenchidos" });
-    }
+      if (!user) {
+        return res.json({ error: "Usuário não encontrado ou token inválido" });
+      }
 
-    const category = await Category.findOne({ name: cat });
+      if (!title || !cat) {
+        return res.json({ error: "Título e/ou categoria não preenchidos" });
+      }
 
-    if (!category) {
-      return res.json({ error: "Categoria não existe " });
-    }
+      const category = await Category.findOne({ name: cat });
 
-    if (price) {
-      price = price.replace(".", "").replace(",", ".").replace("R$ ", "");
-      price = parseFloat(price);
-    } else {
-      price = 0;
-    }
+      if (!category) {
+        return res.json({ error: "Categoria não existe " });
+      }
 
-    const newAd = new Ad();
-    newAd.status = true;
-    newAd.idUser = user._id;
-    newAd.state = user.state;
-    newAd.dateCreated = new Date();
-    newAd.title = title;
-    newAd.category = category._id;
-    newAd.price = price;
-    newAd.priceNegotiable = priceneg === "true";
-    newAd.description = desc;
-    newAd.views = 0;
-    newAd.images = [];
+      if (price) {
+        price = price.replace(".", "").replace(",", ".").replace("R$ ", "");
+        price = parseFloat(price);
+      } else {
+        price = 0;
+      }
 
-    // Suporte a múltiplas imagens (img ou img[])
-    let files = req.files?.img || req.files?.["img[]"];
-    if (files) {
-      const imageArray = Array.isArray(files) ? files : [files];
+      const newAd = new Ad();
+      newAd.status = true;
+      newAd.idUser = user._id;
+      newAd.state = user.state;
+      newAd.dateCreated = new Date();
+      newAd.title = title;
+      newAd.category = category._id;
+      newAd.price = price;
+      newAd.priceNegotiable = priceneg === "true";
+      newAd.description = desc;
+      newAd.views = 0;
+      newAd.images = [];
 
-      for (let file of imageArray) {
-        if (["image/jpeg", "image/jpg", "image/png"].includes(file.mimetype)) {
-          let url = await addImage(file.data);
-          newAd.images.push({
-            url,
-            default: false,
-          });
-        } else {
-          return res.json({
-            error: "Tipo de imagem não suportado, apenas PNG, JPG ou JPEG",
-          });
+      // Suporte a múltiplas imagens (img ou img[])
+      let files = req.files?.img || req.files?.["img[]"];
+      if (files) {
+        const imageArray = Array.isArray(files) ? files : [files];
+
+        for (let file of imageArray) {
+          if (["image/jpeg", "image/jpg", "image/png"].includes(file.mimetype)) {
+            let url = await addImage(file.data);
+            newAd.images.push({
+              url,
+              default: false,
+            });
+          } else {
+            return res.json({
+              error: "Tipo de imagem não suportado, apenas PNG, JPG ou JPEG",
+            });
+          }
         }
       }
-    }
 
-    if (newAd.images.length > 0) {
-      newAd.images[0].default = true;
-    }
+      if (newAd.images.length > 0) {
+        newAd.images[0].default = true;
+      }
 
-    const info = await newAd.save();
-    res.json({ id: info._id });
+      const info = await newAd.save();
+      res.json({ id: info._id });
+    } catch (error) {
+      console.error("Erro ao adicionar anúncio:", error);
+      res.status(500).json({ error: "Erro interno ao adicionar anúncio" });
+    }
   },
   getList: async (req, res) => {
     let {
@@ -164,9 +178,9 @@ module.exports = {
       // pegando a imagem padrao
       let defaultImg = adsData[i].images.find((e) => e.default);
       if (defaultImg) {
-        image = `${process.env.BASE}/media/${defaultImg.url}`; // Corrigido para interpolação de string
+        image = resolveImageUrl(defaultImg.url);
       } else {
-        image = `${process.env.BASE}/media/default.jpg`; // Corrigido para interpolação de string
+        image = `${process.env.BASE}/media/default.jpg`;
       }
 
       ads.push({
@@ -199,7 +213,7 @@ module.exports = {
 
     let images = [];
     for (let i in ad.images) {
-      images.push(`${process.env.BASE}/media/${ad.images[i].url}`); // Corrigido para interpolação de string
+      images.push(resolveImageUrl(ad.images[i].url));
     }
 
     let category = await Category.findById(ad.category).exec();
@@ -215,11 +229,11 @@ module.exports = {
 
       for (let i in otherData) {
         if (otherData[i]._id.toString() !== ad.id.toString()) {
-          let image = `${process.env.BASE}/media/default.jpg`; // Corrigido para interpolação de string
+          let image = `${process.env.BASE}/media/default.jpg`;
 
           let defaultImg = otherData[i].images.find((e) => e.default);
           if (defaultImg) {
-            image = `${process.env.BASE}/media/${defaultImg.url}`; // Corrigido para interpolação de string
+            image = resolveImageUrl(defaultImg.url);
           }
 
           others.push({
