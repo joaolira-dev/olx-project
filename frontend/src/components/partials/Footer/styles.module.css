@@ -1,73 +1,99 @@
 .footer {
-   background-color: #f8f8f8;
-   padding: 15px;
-   border-top: 1px solid #ddd;
-   margin-top: 60px;
-   font-size: 14px;
-   color: #555;
- }
- 
- .footerContainer {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
-   gap: 20px;
-   max-width: 1200px;
-   margin: 0 auto;
- }
- 
- .footerSection {
-   flex: 1 1 200px;
- }
- 
- .footerSection h4 {
-   margin-bottom: 10px;
-   font-size: 16px;
-   color: #333;
- }
- 
- .footerSection ul {
-   list-style: none;
-   padding: 0;
-   margin: 0;
- }
- 
- .footerSection ul li {
-   margin-bottom: 8px;
- }
- 
- .footerSection a {
-   text-decoration: none;
-   color: #1e90ff;
- }
- 
- .footerSection a:hover {
-   text-decoration: underline;
- }
- 
- .copy {
-   text-align: center;
-   margin-top: 30px;
-   font-size: 13px;
-   color: #aaa;
- }
- 
- @media (max-width: 600px) {
+  background-color: #1a1a2e;
+  padding: 40px 20px 20px;
+  margin-top: 60px;
+  font-size: 14px;
+  color: #b0b0c5;
+}
+
+.footerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerSection {
+  flex: 1 1 200px;
+}
+
+.footerSection h4 {
+  margin-bottom: 14px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footerSection h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, #6e0ad6, #a855f7);
+  border-radius: 2px;
+}
+
+.footerSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerSection ul li {
+  margin-bottom: 8px;
+}
+
+.footerSection a {
+  text-decoration: none;
+  color: #8e8eb0;
+  transition: color 0.25s ease;
+}
+
+.footerSection a:hover {
+  color: #a855f7;
+}
+
+.footerSection p {
+  line-height: 1.6;
+  color: #8e8eb0;
+}
+
+.copy {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  font-size: 13px;
+  color: #55556e;
+  border-top: 1px solid #2a2a45;
+}
+
+@media (max-width: 600px) {
   .footerContainer {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 10px; 
+    gap: 10px;
   }
 
   .footerSection {
-    width: auto; 
-    max-width: 300px; 
-    margin-bottom: 10px; 
+    width: auto;
+    max-width: 300px;
+    margin-bottom: 10px;
   }
 
   .footerSection h4 {
-    margin-top: 0; 
+    margin-top: 0;
+  }
+
+  .footerSection h4::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .copy {
